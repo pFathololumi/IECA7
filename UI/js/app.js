@@ -15,5 +15,24 @@
         this.users ={
             "123":{'name':'hamed','money':'2000'}
         };
+
+        $scope.symbolSession = null;
+        this.select = function () {
+            $scope.symbol = marketCtrl.symbolList[$scope.selectSymbol];
+        }
+
+        $scope.symbols = [
+           { 'name': 'IRANKH' },
+           { 'name': 'SAIPA' },
+           { 'name': 'BMW' },
+           { 'name': 'BENZ' }
+        ];
+
+        this.symbolList = {
+            'IRANKH':{ 'price': 20000 },
+            'SAIPA':{ 'price': 100000 },
+            'BMW':{ 'price': 900000 },
+            'BENZ':{ 'price': 800000 }
+        };
     });
 })();
