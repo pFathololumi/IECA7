@@ -8,7 +8,7 @@
     var app = angular.module('stockmarket',[]);
     app.controller('MarketController',function ($scope){
         var marketCtrl = this;
-        this.session = null;
+        $scope.session = null;
         this.symbols=[];
         this.doLogin = function(){
             $scope.session= marketCtrl.users [$scope.enteredID];
