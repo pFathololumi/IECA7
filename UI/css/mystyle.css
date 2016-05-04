@@ -104,3 +104,10 @@ footer {
         height: 70%;
     }
 }
+
+.inline-style{
+	display: inline;
+	margin: 1%;
+}
+
+
