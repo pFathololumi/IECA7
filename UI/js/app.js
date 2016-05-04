@@ -8,13 +8,15 @@
     var app = angular.module('stockmarket',[]);
     app.controller('MarketController',function ($scope){
         var marketCtrl = this;
-        $scope.session = null;
+        this.session = null;
+        this.symbols=[];
         this.doLogin = function(){
             $scope.session= marketCtrl.users [$scope.enteredID];
         }
         this.users ={
             "123":{'name':'hamed','money':'2000'}
         };
+<<<<<<< HEAD
 
         $scope.symbolSession = null;
         this.select = function () {
@@ -34,5 +36,17 @@
             'BMW':{ 'price': 900000 },
             'BENZ':{ 'price': 800000 }
         };
+=======
+        var dataSymbol = [{
+            "name":"Rana",
+            "quantity": 200,
+            "sellingOffers":[{"id":22,"quantity":20,"price":240,"type":"GTC"},{"id":22,"quantity":20,"price":240,"type":"GTC"}],
+            "buyingOffers":[{"id":22,"quantity":20,"price":240,"type":"GTC"},{"id":22,"quantity":20,"price":240,"type":"GTC"}]
+        }];
+        this.symbols = dataSymbol;
+        this.updateSymbols = function(){
+            alert('not implemented');
+        }
+>>>>>>> 24c95292e4f98353676f95f22d6bae88114a2b59
     });
 })();
