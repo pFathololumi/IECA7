@@ -1,10 +1,15 @@
-/*!
- * Start Bootstrap - Modern Business HTML Template (http://startbootstrap.com)
- * Code licensed under the Apache License v2.0.
- * For details, see http://www.apache.org/licenses/LICENSE-2.0.
- */
-
-/* Global Styles */
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 4, 2016, 8:38:52 PM
+    Author     : Hamed Ara
+*/
+.login-wrapper{
+    margin: 5%;
+}
 
 html,
 body {
