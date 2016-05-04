@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -13,29 +13,36 @@
     <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
 </head>
 
-<body ng-app="stock-">
+<body ng-app="stockmarket">
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
+        <div class="container" ng-controller="MarketController as ctrl">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
                 <div class="navbar-brand">Stock Market</div>
             </div>
+            
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li >
+                   
+                    <li ng-show="!session">
                         <div class="input-group login-wrapper">
-                            <input type="text" class="form-control" placeholder="Enter your ID">
+                            <input type="text" ng-model="enteredID" class="form-control" placeholder="Enter your ID">
                             <span class="input-group-btn">
-                              <button class="btn btn-secondary btn-default" type="button">Sign in</button>
+                              <button ng-click="ctrl.doLogin()"  class="btn btn-secondary btn-default" type="button">Sign in</button>
                             </span>
+                        </div>
+                    </li>
+                    <li ng-show="session">
+                        <div class="navbar-header">
+                            <div class="navbar-brand">موجودی: {{session.money}}</div>
+                        </div>
+                    </li>
+                    <li ng-show="session">
+                        <div class="navbar-header">
+                            <div class="navbar-brand">خوش آمدید {{session.name}}</div>
                         </div>
                     </li>
                     
@@ -161,8 +168,7 @@
                 </div>
             </div>
         </div>
-
-
+            
         <!-- Portfolio Section -->
         <div class="row">
             <div class="col-lg-12">
@@ -240,12 +246,11 @@
 
     <!-- jQuery -->
     <script src="lib/jquery.js"></script>
+    <!-- Angular -->
+    <script src="lib/angular.min.js"/>
     <!-- Bootstrap Core JavaScript -->
     <script src="lib/bootstrap.min.js"></script>
-
-    <script type="text/javascript" src="lib/angular.js"></script>
-    <script type="text/javascript" src="lib/angular.min.js"></script>
-
+    <script src ="js/app.js"/>
     <!-- Script to Activate the Carousel -->
     <script>
     $('.carousel').carousel({
