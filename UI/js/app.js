@@ -14,9 +14,9 @@
             $scope.session= marketCtrl.users [$scope.enteredID];
         }
         this.users ={
-            "123":{'name':'hamed','money':'2000'}
+            "123":{'name':'hamed','money':'2000'},
+            "80":{'name':'parisa','money':'2000'}
         };
-<<<<<<< HEAD
 
         $scope.symbolSession = null;
         this.select = function () {
@@ -36,7 +36,7 @@
             'BMW':{ 'price': 900000 },
             'BENZ':{ 'price': 800000 }
         };
-=======
+
         var dataSymbol = [{
             "name":"Rana",
             "quantity": 200,
@@ -47,6 +47,5 @@
         this.updateSymbols = function(){
             alert('not implemented');
         }
->>>>>>> 24c95292e4f98353676f95f22d6bae88114a2b59
     });
 })();
