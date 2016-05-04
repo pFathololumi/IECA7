@@ -9,7 +9,7 @@
     app.controller('MarketController',function ($scope){
         var marketCtrl = this;
         $scope.session = null;
-        this.symbols=[];
+        this.symbolsQ=[];
         this.doLogin = function(){
             $scope.session= marketCtrl.users [$scope.enteredID];
         }
@@ -43,7 +43,7 @@
             "sellingOffers":[{"id":22,"quantity":20,"price":240,"type":"GTC"},{"id":22,"quantity":20,"price":240,"type":"GTC"}],
             "buyingOffers":[{"id":22,"quantity":20,"price":240,"type":"GTC"},{"id":22,"quantity":20,"price":240,"type":"GTC"}]
         }];
-        this.symbols = dataSymbol;
+        this.symbolsQ = dataSymbol;
         this.updateSymbols = function(){
             alert('not implemented');
         }
