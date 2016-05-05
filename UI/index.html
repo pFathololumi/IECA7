@@ -94,7 +94,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    Welcome to Modern Business
+                    به بازار نقل و انتقالات سهام خوش آمدید
                 </h1>
             </div>
             <div class="col-md-4">
@@ -133,7 +133,8 @@
                                 
                             </label>-->
                             <!--<button type="button" class="mr btn btn-pill-left btn-success" data-toggle="modal" data-target="#symbol" data-backdrop="static">{{symbol.name}}</button>-->
-                            <p><a class="" data-toggle="modal" data-target="#symbol" data-backdrop="static" ng-model="selectSymbol" ng-click="ctrl.select()">{{symbol.name}}</a></p>  
+                            <p><a class="" data-toggle="modal" data-target="#symbol" data-backdrop="static" ng-model="selectSymbol" ng-click="ctrl.select(symbol.name)" ng-hide="!session">{{symbol.name}}</a></p>  
+
                             
                         </div>
                         
@@ -148,14 +149,14 @@
         <!-- /.row -->
 
         <!-- Portfolio Section -->
-        <div class="row">
+        <div class="row mystyle" >
             <div class="col-lg-12">
                 <h2 class="page-header ">
-                    <span class="inline-style">وضعیت بازار</span>
                     <button class="btn btn-secondary btn-default" ng-click="ctrl.updateSymbols()">به روز رسانی</button>
+                    <span class="inline-style">وضعیت بازار</span>
                 </h2>
             </div>
-            <div ng-repeat="symbol in ctrl.symbolsQ | orderBy:'name'">
+            <div ng-repeat="symbol in ctrl.symbolsQ | orderBy:'name'" ng-show="session">
                 <div class="panel-group">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -187,11 +188,13 @@
                         </ul>
                     </div>
                 </div>
+
             </div>
         </div>
         <!-- /.row -->
 
-        <div id="symbol" class="modal fade container">
+        <div id="symbol" class="modal fade container" ng-show="session">
+
             <!--<div ng-include="'buy&sellForm.html'"></div>-->
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -201,9 +204,11 @@
                     </div>
                     <div class="modal-body mystyle" style="padding: 30px">
                         <label for="subject" class="control-label">نام سهام</label>
-                        <input type="text" placeholder="{{session.name}}" disabled="" class="form-control mystyle" vk_14887="subscribed" vk_1529c="subscribed">
+
+                        <input type="text" placeholder="{{symbolName}}" disabled="" class="form-control mystyle" vk_14887="subscribed" vk_1529c="subscribed">
                         <label for="subject" class="control-label">قیمت سهام</label>
-                        <input type="text" placeholder="{{symbolSession.price}}" disabled="" class="form-control mystyle" vk_14887="subscribed" vk_1529c="subscribed">
+                        <input type="text" placeholder="{{symbolPrice.price}}" disabled="" class="form-control mystyle" vk_14887="subscribed" vk_1529c="subscribed">
+
                         <br />
                         <br />
                         <form name="buy&sellForm" role="form" class="form-horizontal mystyle" novalidate>
@@ -219,8 +224,9 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-success" type="submit" ng-click="buy&sellForm.$valid &&createPoll()">فروش</button>
-                        <button class="btn btn-success" type="submit" ng-click="buy&sellForm.$valid &&createPoll()">خرید</button>
+                        <button class="btn btn-success" type="submit" ng-click="buy&sellForm.$valid &&createSell()">فروش</button>
+                        <button class="btn btn-success" type="submit" ng-click="buy&sellForm.$valid &&createBuy()">خرید</button>
+
                     </div>
                 </div>
             </div>

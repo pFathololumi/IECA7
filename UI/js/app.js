@@ -6,7 +6,7 @@
 
 (function (){
     var app = angular.module('stockmarket',[]);
-    var symbolSession = null;
+    
     app.controller('MarketController',function ($scope,$interval){
         var marketCtrl = this;
         $scope.session = null;
@@ -19,9 +19,11 @@
             "80":{'name':'parisa','money':'2000'}
         };
 
-        $scope.symbolSession = null;
-        this.select = function () {
-            $scope.symbol = marketCtrl.symbolList[$scope.selectSymbol];
+        $scope.symbolName = null;
+        $scope.symbolPrice = null;
+        this.select = function (value) {
+            $scope.symbolName = value;
+            $scope.symbolPrice = marketCtrl.symbolList[value];
         }
 
         $scope.symbols = [
@@ -56,12 +58,16 @@
         }
 //        $interval(function(){
 //            alert('time');
-//        },1000*15);
+        //        },1000*15);
+
+        this.userRequests = {
+
+        };
+
+        this.createSell = function (quantity, price, type) {
+            marketCtrl.symbolList['UU'] = { 'price': 900 };
+            marketCtrl.userRequests[$scope.enteredID] = { 'quantity': quantity, 'price': price, 'type': type };
+        }
     });
-//    app.controller('mycontroller', ['$scope','$modal', function ($scope, $modal) {
-//        this.load = function () {
-//            alert(symbolSession.price);
-//            return symbolSession.price;
-//        }
-//    }]);
+
 })();
