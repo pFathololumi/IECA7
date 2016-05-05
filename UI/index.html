@@ -215,19 +215,19 @@
                         <br />
                         <form name="buy&sellForm" role="form" class="form-horizontal mystyle" novalidate>
                             <div class="form-group">
-                                <input type="text" placeholder="...قیمت پیشنهادی" class="form-control mystyle" vk_14887="subscribed" vk_1529c="subscribed" vk_1b89b="subscribed" vk_1a2cb="subscribed" vk_1c499="subscribed" vk_19ea1="subscribed">
+                                <input ng-model="in1" type="text" placeholder="...قیمت پیشنهادی" class="form-control mystyle" vk_14887="subscribed" vk_1529c="subscribed" vk_1b89b="subscribed" vk_1a2cb="subscribed" vk_1c499="subscribed" vk_19ea1="subscribed">
                             </div>
                             <div class="form-group">
-                                <input type="text" placeholder="...مقدار سهام" class="form-control mystyle" vk_14887="subscribed" vk_1529c="subscribed" vk_1b89b="subscribed" vk_1a2cb="subscribed" vk_1c499="subscribed" vk_19ea1="subscribed">
+                                <input ng-model="in2" type="text" placeholder="...مقدار سهام" class="form-control mystyle" vk_14887="subscribed" vk_1529c="subscribed" vk_1b89b="subscribed" vk_1a2cb="subscribed" vk_1c499="subscribed" vk_19ea1="subscribed">
                             </div>
                             <div class="form-group">
-                                <input type="text" placeholder="...نوع درخواست" class="form-control mystyle" vk_14887="subscribed" vk_1529c="subscribed" vk_1b89b="subscribed" vk_1a2cb="subscribed" vk_1c499="subscribed" vk_19ea1="subscribed">
+                                <input ng-model="in3" type="text" placeholder="...نوع درخواست" class="form-control mystyle" vk_14887="subscribed" vk_1529c="subscribed" vk_1b89b="subscribed" vk_1a2cb="subscribed" vk_1c499="subscribed" vk_19ea1="subscribed">
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-success" type="submit" ng-click="buy&sellForm.$valid &&createSell()">فروش</button>
-                        <button class="btn btn-success" type="submit" ng-click="buy&sellForm.$valid &&createBuy()">خرید</button>
+                        <button id="sell" class="btn btn-success" type="submit" ng-click="buy&sellForm.$valid &&ctrl.createRequest(in1,in2,in3,id)">فروش</button>
+                        <button id="buy" class="btn btn-success" type="submit" ng-click="buy&sellForm.$valid &&ctrl.createRequest(in1,in2,in3,id)">خرید</button>
 
                     </div>
                 </div>

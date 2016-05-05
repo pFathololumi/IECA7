@@ -64,9 +64,10 @@
 
         };
 
-        this.createSell = function (quantity, price, type) {
-            marketCtrl.symbolList['UU'] = { 'price': 900 };
-            marketCtrl.userRequests[$scope.enteredID] = { 'quantity': quantity, 'price': price, 'type': type };
+        this.createRequest = function (quantity, price, type, buyOrSell) {
+            alert('**');
+            marketCtrl.userRequests[$scope.enteredID] = { 'instrument': $scope.symbolName, 'quantity': quantity, 'price': price, 'type': type, 'buyOrSell': buyOrSell };
+            alert($scope.userRequests[$scope.enteredID].instrument);
         }
     });
 
