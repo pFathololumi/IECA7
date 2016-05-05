@@ -25,7 +25,6 @@
         this.select = function (value) { 
             $scope.symbolName = value;
             $scope.symbolPrice = marketCtrl.symbolList[value];
-            $('#in1').val("");
         }
 
         $scope.symbols = [
@@ -62,11 +61,16 @@
 //            alert('time');
         //        },1000*15);
 
+        
         $scope.userRequests = [];
 
         this.createRequest = function (price, quantity, type, buyOrSell) {
+            
             $scope.userRequests.push({ 'id': $scope.enteredID, 'instrument': $scope.symbolName, 'price': price, 'quantity': quantity, 'type': type, 'buyOrSell': buyOrSell });
-            alert($scope.userRequests[0].id+" "+$scope.userRequests[0].instrument+" "+$scope.userRequests[0].price+" "+$scope.userRequests[0].quantity+" "+$scope.userRequests[0].type+" "+$scope.userRequests[0].buyOrSell);
+            var len = $scope.userRequests.length - 1;
+            
+            alert("SUCCESS: "+$scope.userRequests[len].id + " " + $scope.userRequests[len].instrument + " " + $scope.userRequests[len].price +
+                " " + $scope.userRequests[len].quantity + " " + $scope.userRequests[len].type + " " + $scope.userRequests[len].buyOrSell);
         }
     });
 
