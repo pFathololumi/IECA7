@@ -147,54 +147,15 @@
         </div>
         <!-- /.row -->
 
-        <div id="symbol" class="modal fade container">
-            <!--<div ng-include="'buy&sellForm.html'"></div>-->
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">خرید و فروش سهام</h4>
-                    </div>
-              
-                    <div class="modal-body mystyle" style="padding: 30px" ng-show="session">
-
-                        <label for="subject" class="control-label">نام سهام</label>
-                        <input type="text" ng-show="session" placeholder="{{session.name}}" disabled="" class="form-control mystyle" vk_14887="subscribed" vk_1529c="subscribed">
-                        <label for="subject" class="control-label">قیمت سهام</label>
-                        <input type="text" placeholder="{{symbolSession.price}}" disabled="" class="form-control mystyle" vk_14887="subscribed" vk_1529c="subscribed">
-                        <br />
-                        <br />
-                        <form name="buy&sellForm" role="form" class="form-horizontal mystyle" novalidate>
-                            <div class="form-group">
-                                <input type="text" placeholder="...قیمت پیشنهادی" class="form-control mystyle" vk_14887="subscribed" vk_1529c="subscribed" vk_1b89b="subscribed" vk_1a2cb="subscribed" vk_1c499="subscribed" vk_19ea1="subscribed">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" placeholder="...مقدار سهام" class="form-control mystyle" vk_14887="subscribed" vk_1529c="subscribed" vk_1b89b="subscribed" vk_1a2cb="subscribed" vk_1c499="subscribed" vk_19ea1="subscribed">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" placeholder="...نوع درخواست" class="form-control mystyle" vk_14887="subscribed" vk_1529c="subscribed" vk_1b89b="subscribed" vk_1a2cb="subscribed" vk_1c499="subscribed" vk_19ea1="subscribed">
-                            </div>
-
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-success" type="submit" ng-click="buy&sellForm.$valid &&createPoll()">فروش</button>
-                        <button class="btn btn-success" type="submit" ng-click="buy&sellForm.$valid &&createPoll()">خرید</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- Portfolio Section -->
         <div class="row">
             <div class="col-lg-12">
                 <h2 class="page-header ">
-                    <div class="inline-style">وضعیت بازار</div>
-                    <button class="btn btn-secondary btn-default" ng-click="ctrl.updateSymbols">به روز رسانی</button>
+                    <span class="inline-style">وضعیت بازار</span>
+                    <button class="btn btn-secondary btn-default" ng-click="ctrl.updateSymbols()">به روز رسانی</button>
                 </h2>
             </div>
-
-            <div ng-repeat="symbol in ctrl.symbolsQ">
+            <div ng-repeat="symbol in ctrl.symbolsQ | orderBy:'name'">
                 <div class="panel-group">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -227,9 +188,46 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <!-- /.row -->
+
+        <div id="symbol" class="modal fade container" ng-controller="">
+            <!--<div ng-include="'buy&sellForm.html'"></div>-->
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">خرید و فروش سهام</h4>
+                    </div>
+
+                    <div class="modal-body mystyle" style="padding: 30px" ng-show="session">
+                        <label for="subject" class="control-label">نام سهام</label>
+                        <input type="text" ng-show="session" placeholder="{{session.name}}" disabled="" class="form-control mystyle" vk_14887="subscribed" vk_1529c="subscribed">
+                        <label for="subject" class="control-label">قیمت سهام</label>
+                        <input type="text" placeholder="{{symbolSession.price}}" disabled="" class="form-control mystyle" vk_14887="subscribed" vk_1529c="subscribed">
+                        <br />
+                        <br />
+                        <form name="buy&sellForm" role="form" class="form-horizontal mystyle" novalidate>
+                            <div class="form-group">
+                                <input type="text" placeholder="...قیمت پیشنهادی" class="form-control mystyle" vk_14887="subscribed" vk_1529c="subscribed" vk_1b89b="subscribed" vk_1a2cb="subscribed" vk_1c499="subscribed" vk_19ea1="subscribed">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="...مقدار سهام" class="form-control mystyle" vk_14887="subscribed" vk_1529c="subscribed" vk_1b89b="subscribed" vk_1a2cb="subscribed" vk_1c499="subscribed" vk_19ea1="subscribed">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="...نوع درخواست" class="form-control mystyle" vk_14887="subscribed" vk_1529c="subscribed" vk_1b89b="subscribed" vk_1a2cb="subscribed" vk_1c499="subscribed" vk_19ea1="subscribed">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" type="submit" ng-click="buy&sellForm.$valid &&createPoll()">فروش</button>
+                        <button class="btn btn-success" type="submit" ng-click="buy&sellForm.$valid &&createPoll()">خرید</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
         <!-- Features Section -->
         <div class="row">
             <div class="col-lg-12">

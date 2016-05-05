@@ -6,7 +6,7 @@
 
 (function (){
     var app = angular.module('stockmarket',[]);
-    app.controller('MarketController',function ($scope){
+    app.controller('MarketController',function ($scope,$interval){
         var marketCtrl = this;
         $scope.session = null;
         this.symbolsQ=[];
@@ -42,10 +42,19 @@
             "quantity": 200,
             "sellingOffers":[{"id":22,"quantity":20,"price":240,"type":"GTC"},{"id":22,"quantity":20,"price":240,"type":"GTC"}],
             "buyingOffers":[{"id":22,"quantity":20,"price":240,"type":"GTC"},{"id":22,"quantity":20,"price":240,"type":"GTC"}]
+        },
+        {
+            "name":"Camaro",
+            "quantity": 1000,
+            "sellingOffers":[{"id":22,"quantity":20,"price":240,"type":"GTC"},{"id":22,"quantity":20,"price":240,"type":"GTC"}],
+            "buyingOffers":[{"id":22,"quantity":20,"price":240,"type":"GTC"},{"id":22,"quantity":20,"price":240,"type":"GTC"}]
         }];
         this.symbolsQ = dataSymbol;
         this.updateSymbols = function(){
             alert('not implemented');
         }
+//        $interval(function(){
+//            alert('time');
+//        },1000*15);
     });
 })();
