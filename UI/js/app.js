@@ -10,20 +10,22 @@
     app.controller('MarketController',function ($scope,$interval){
         var marketCtrl = this;
         $scope.session = null;
-        this.symbolsQ=[];
+        this.symbolsQ = [];
         this.doLogin = function(){
-            $scope.session= marketCtrl.users [$scope.enteredID];
+            $scope.session = marketCtrl.users[$scope.enteredID];
         }
         this.users ={
             "123":{'name':'hamed','money':'2000'},
             "80":{'name':'parisa','money':'2000'}
         };
 
+        //$scope.buy & sellForm.$setPristine();
         $scope.symbolName = null;
         $scope.symbolPrice = null;
-        this.select = function (value) {
+        this.select = function (value) { 
             $scope.symbolName = value;
             $scope.symbolPrice = marketCtrl.symbolList[value];
+            $('#in1').val("");
         }
 
         $scope.symbols = [
@@ -43,14 +45,14 @@
         var dataSymbol = [{
             "name":"Rana",
             "quantity": 200,
-            "sellingOffers":[{"id":22,"quantity":20,"price":240,"type":"GTC"},{"id":22,"quantity":20,"price":240,"type":"GTC"}],
-            "buyingOffers":[{"id":22,"quantity":20,"price":240,"type":"GTC"},{"id":22,"quantity":20,"price":240,"type":"GTC"}]
+            "sellingOffers": [{ "id": 22, "quantity": 20, "price": 240, "type": "GTC" }, { "id": 22, "quantity": 20, "price": 240, "type": "GTC" }],
+            "buyingOffers": [{ "id": 22, "quantity": 20, "price": 240, "type": "GTC" }, { "id": 22, "quantity": 20, "price": 240, "type": "GTC" }]
         },
         {
-            "name":"Camaro",
+            "name": "Camaro",
             "quantity": 1000,
-            "sellingOffers":[{"id":22,"quantity":20,"price":240,"type":"GTC"},{"id":22,"quantity":20,"price":240,"type":"GTC"}],
-            "buyingOffers":[{"id":22,"quantity":20,"price":240,"type":"GTC"},{"id":22,"quantity":20,"price":240,"type":"GTC"}]
+            "sellingOffers": [{ "id": 22, "quantity": 20, "price": 240, "type": "GTC" }, { "id": 22, "quantity": 20, "price": 240, "type": "GTC" }],
+            "buyingOffers": [{ "id": 22, "quantity": 20, "price": 240, "type": "GTC" }, { "id": 22, "quantity": 20, "price": 240, "type": "GTC" }]
         }];
         this.symbolsQ = dataSymbol;
         this.updateSymbols = function(){
@@ -60,14 +62,11 @@
 //            alert('time');
         //        },1000*15);
 
-        this.userRequests = {
+        $scope.userRequests = [];
 
-        };
-
-        this.createRequest = function (quantity, price, type, buyOrSell) {
-            alert('**');
-            marketCtrl.userRequests[$scope.enteredID] = { 'instrument': $scope.symbolName, 'quantity': quantity, 'price': price, 'type': type, 'buyOrSell': buyOrSell };
-            alert($scope.userRequests[$scope.enteredID].instrument);
+        this.createRequest = function (price, quantity, type, buyOrSell) {
+            $scope.userRequests.push({ 'id': $scope.enteredID, 'instrument': $scope.symbolName, 'price': price, 'quantity': quantity, 'type': type, 'buyOrSell': buyOrSell });
+            alert($scope.userRequests[0].id+" "+$scope.userRequests[0].instrument+" "+$scope.userRequests[0].price+" "+$scope.userRequests[0].quantity+" "+$scope.userRequests[0].type+" "+$scope.userRequests[0].buyOrSell);
         }
     });
 
