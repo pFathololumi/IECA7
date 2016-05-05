@@ -6,7 +6,7 @@
 
 (function (){
     var app = angular.module('stockmarket',[]);
-     var symbolSession = null;
+    var symbolSession = null;
     app.controller('MarketController',function ($scope,$interval){
         var marketCtrl = this;
         $scope.session = null;
@@ -58,9 +58,10 @@
 //            alert('time');
 //        },1000*15);
     });
-    app.controller('mycontroller', ['$scope','$modal', function ($scope, $modal) {
-        this.load = function () {
-            return symbolSession.price;
-        }
-    }]);
+//    app.controller('mycontroller', ['$scope','$modal', function ($scope, $modal) {
+//        this.load = function () {
+//            alert(symbolSession.price);
+//            return symbolSession.price;
+//        }
+//    }]);
 })();
