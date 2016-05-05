@@ -5,27 +5,27 @@
  */
 
 (function (){
-    var app = angular.module('stockmarket', []);
-    var symbolSession = null;
-    app.controller('MarketController', ['$scope', function ($scope) {
-
+    var app = angular.module('stockmarket',[]);
+    
+    app.controller('MarketController',function ($scope,$interval){
         var marketCtrl = this;
         $scope.session = null;
         this.symbolsQ=[];
         this.doLogin = function(){
             $scope.session= marketCtrl.users [$scope.enteredID];
         }
-
         this.users ={
             "123":{'name':'hamed','money':'2000'},
             "80":{'name':'parisa','money':'2000'}
         };
 
-        //$scope.symbolSession = null;
-        this.select = function () {
-            symbolSession = marketCtrl.symbolList[$scope.selectSymbol];
+        $scope.symbolName = null;
+        $scope.symbolPrice = null;
+        this.select = function (value) {
+            $scope.symbolName = value;
+            $scope.symbolPrice = marketCtrl.symbolList[value];
         }
-       
+
         $scope.symbols = [
            { 'name': 'IRANKH' },
            { 'name': 'SAIPA' },
@@ -45,17 +45,29 @@
             "quantity": 200,
             "sellingOffers":[{"id":22,"quantity":20,"price":240,"type":"GTC"},{"id":22,"quantity":20,"price":240,"type":"GTC"}],
             "buyingOffers":[{"id":22,"quantity":20,"price":240,"type":"GTC"},{"id":22,"quantity":20,"price":240,"type":"GTC"}]
+        },
+        {
+            "name":"Camaro",
+            "quantity": 1000,
+            "sellingOffers":[{"id":22,"quantity":20,"price":240,"type":"GTC"},{"id":22,"quantity":20,"price":240,"type":"GTC"}],
+            "buyingOffers":[{"id":22,"quantity":20,"price":240,"type":"GTC"},{"id":22,"quantity":20,"price":240,"type":"GTC"}]
         }];
         this.symbolsQ = dataSymbol;
         this.updateSymbols = function(){
             alert('not implemented');
         }
-       
-    }]);
+//        $interval(function(){
+//            alert('time');
+        //        },1000*15);
 
-    app.controller('mycontroller', ['$scope','$modal', function ($scope, $modal) {
-        this.load = function () {
-            return symbolSession.price;
+        this.userRequests = {
+
+        };
+
+        this.createSell = function (quantity, price, type) {
+            marketCtrl.symbolList['UU'] = { 'price': 900 };
+            marketCtrl.userRequests[$scope.enteredID] = { 'quantity': quantity, 'price': price, 'type': type };
         }
-    }]);
+    });
+
 })();
