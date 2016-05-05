@@ -103,9 +103,16 @@
                     <div class="panel-heading">
                         <h4><i class="fa fa-fw fa-check"></i>لیست درخواست ها</h4>
                     </div>
-                    <div class="panel-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
-                        <a href="#" class="btn btn-default">Learn More</a>
+                    <div class="panel-body" >
+                        <!--<div ng-repeat="req in userRequests | orderBy:'name'" class="mystyle">-->
+                        <ul ng-repeat="req in userRequests" class="mystyle" ng-show="session">
+                            <li class="list-group-item">
+                                <div class="glyphicon-minus text-success">
+                                    <div class="inline-style">{{req.buyOrSell}} -> نام سهام:{{ req.instrument}} & قیمت:{{req.price}} & مقدار:{{req.quantity}} & نوع:{{req.type}}</div>
+                                </div>
+                            </li>
+                        </ul>
+                        <!--</div>-->
                     </div>
                 </div>
             </div>
@@ -126,17 +133,17 @@
                         <h4><i class="fa fa-fw fa-compass myPosition"></i> لیست سهام</h4>
                     </div>
                     <div class="panel-body">
-                        <div ng-repeat="symbol in symbols" class="mystyle">
+                        <div ng-repeat="symbol in symbols | orderBy:'name'" class="mystyle">
                             <!--<label>
-                                {{symbol.name}}
-                                <input type="radio" name="name" value="{{symbol.name}}" required />
-                                <br />
-                                
-                            </label>-->
-                            <!--<button type="button" class="mr btn btn-pill-left btn-success" data-toggle="modal" data-target="#symbol" data-backdrop="static">{{symbol.name}}</button>-->
-                            <p><a class="" data-toggle="modal" data-target="#symbol" data-backdrop="static" ng-model="selectSymbol" ng-click="ctrl.select(symbol.name)" ng-hide="!session">{{symbol.name}}</a></p>  
+            {{symbol.name}}
+            <input type="radio" name="name" value="{{symbol.name}}" required />
+            <br />
 
-                            
+        </label>-->
+                            <!--<button type="button" class="mr btn btn-pill-left btn-success" data-toggle="modal" data-target="#symbol" data-backdrop="static">{{symbol.name}}</button>-->
+                            <p><a class="" data-toggle="modal" data-target="#symbol" data-backdrop="static" ng-model="selectSymbol" ng-click="ctrl.select(symbol.name)" ng-hide="!session">{{symbol.name}}</a></p>
+
+
                         </div>
                         
                         <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>-->
