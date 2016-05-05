@@ -5,23 +5,27 @@
  */
 
 (function (){
-    var app = angular.module('stockmarket',[]);
-    app.controller('MarketController',function ($scope){
+    var app = angular.module('stockmarket', []);
+    var symbolSession = null;
+    app.controller('MarketController', ['$scope', function ($scope) {
+
         var marketCtrl = this;
-        this.session = null;
-        this.symbols=[];
+        $scope.session = null;
+        this.symbolsQ=[];
         this.doLogin = function(){
             $scope.session= marketCtrl.users [$scope.enteredID];
         }
+
         this.users ={
-            "123":{'name':'hamed','money':'2000'}
+            "123":{'name':'hamed','money':'2000'},
+            "80":{'name':'parisa','money':'2000'}
         };
 
-        $scope.symbolSession = null;
+        //$scope.symbolSession = null;
         this.select = function () {
-            $scope.symbol = marketCtrl.symbolList[$scope.selectSymbol];
+            symbolSession = marketCtrl.symbolList[$scope.selectSymbol];
         }
-
+       
         $scope.symbols = [
            { 'name': 'IRANKH' },
            { 'name': 'SAIPA' },
@@ -36,16 +40,22 @@
             'BENZ':{ 'price': 800000 }
         };
 
-        //var dataSymbol = [{
-        //    "name":"Rana",
-        //    "quantity": 200,
-        //    "sellingOffers":[{"id":22,"quantity":20,"price":240,"type":"GTC"},{"id":22,"quantity":20,"price":240,"type":"GTC"}],
-        //    "buyingOffers":[{"id":22,"quantity":20,"price":240,"type":"GTC"},{"id":22,"quantity":20,"price":240,"type":"GTC"}]
-        //}];
-        //this.symbols = dataSymbol;
-        //this.updateSymbols = function(){
-        //    alert('not implemented');
-        //}
+        var dataSymbol = [{
+            "name":"Rana",
+            "quantity": 200,
+            "sellingOffers":[{"id":22,"quantity":20,"price":240,"type":"GTC"},{"id":22,"quantity":20,"price":240,"type":"GTC"}],
+            "buyingOffers":[{"id":22,"quantity":20,"price":240,"type":"GTC"},{"id":22,"quantity":20,"price":240,"type":"GTC"}]
+        }];
+        this.symbolsQ = dataSymbol;
+        this.updateSymbols = function(){
+            alert('not implemented');
+        }
+       
+    }]);
 
-    });
+    app.controller('mycontroller', ['$scope','$modal', function ($scope, $modal) {
+        this.load = function () {
+            return symbolSession.price;
+        }
+    }]);
 })();
