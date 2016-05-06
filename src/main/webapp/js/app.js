@@ -33,7 +33,6 @@
         }
 
 
-        //$scope.buy & sellForm.$setPristine();
         $scope.symbolName = null;
         $scope.symbolPrice = null;
         this.select = function (value) { 
@@ -55,6 +54,17 @@
             'BENZ':{ 'price': 800000 }
         };
 
+        this.getDataSymbol = function () {
+            alert("+");
+            $http({
+                method: 'GET',
+                urt: 'getinstrument',
+            }).success(function () {
+                alert('Success:' + data + " " + (typeof data));
+            }).error(function (data, status, headers, config) {
+                alert('Error:' + data);
+            });
+        }
         var dataSymbol = [{
             "name":"Rana",
             "quantity": 200,
