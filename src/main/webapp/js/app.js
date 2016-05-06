@@ -10,18 +10,23 @@
     app.controller('MarketController',['$scope','$http',function ($scope,$http,$interval){
         var marketCtrl = this;
         $scope.session = null;
+        $scope.notification = null;
         this.symbolsQ = [];
+        this.closeNotificationBar = function (){
+            $scope.notification=null;
+        }
         this.doLogin = function(){
             $http({
                 method : 'GET',
                 url :'getcustomer',
                 params : {'id': $scope.enteredID}
             }).success(function(data,status, headers, config){
-                alert('Success:' + data + " " + (typeof data));
-
                     console.log((typeof data));
                     if(typeof data !=='string')
-                    $scope.session=data;
+                        $scope.session=data;
+                    else
+                        $scope.notification = data;
+                    
             }).error(function (data,status, headers, config){
                     alert('Error:' + data);
             });
