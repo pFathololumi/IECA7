@@ -119,7 +119,7 @@
 
             alert("SUCCESS: " + $scope.userRequests[len].id + " " + $scope.userRequests[len].instrument + " " + $scope.userRequests[len].price +
                 " " + $scope.userRequests[len].quantity + " " + $scope.userRequests[len].type + " " + $scope.userRequests[len].buyOrSell);
-
+            var cost = (buyOrSell==='buy')? -1*price*quantity:price*quantity;
             $http({
                 method: 'GET',
                 url: 'transaction',
@@ -127,10 +127,12 @@
             }).success(function (data, status, headers, config) {
                 console.log((typeof data));
                 if (typeof data !== 'string') {
-                   
+                   $scope.notification= data.Error;
                 }
-                else
+                else{
                     $scope.notification = data;
+                    $scope.session.money += cost;
+                }
 
             }).error(function (data, status, headers, config) {
                 alert('Error:' + data);

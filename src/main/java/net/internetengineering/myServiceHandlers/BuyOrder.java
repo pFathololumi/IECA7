@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
+import net.internetengineering.utils.JsonBuilder;
 
 public class BuyOrder{
 	public static void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,15 +28,15 @@ public class BuyOrder{
 				throw new DataIllegalException("Mismatched Parameters");
 			buyingOffer.validateVariables();
 			StockMarket.getInstance().executeBuyingOffer(out,buyingOffer,instrument);
-			//request.setAttribute("successes", logger.getAndFlushMyLogger());
 		} catch (DataIllegalException e) {
-			out.println(e.getMessage());
-//			request.setAttribute("errors", logger.getAndFlushMyLogger());
+                    Map<String,Object> map = new HashMap<String, Object>();
+                    map.put("Error",e.getMessage() );
+                    JsonBuilder.writeToJSON(map, response);
 		}catch(Exception e){
-			out.println("Mismatched Parameters");
-//			request.setAttribute("errors", logger.getAndFlushMyLogger());
+                        Map<String,Object> map = new HashMap<String, Object>();
+                        map.put("Error","Mismatched Parameters" );
+                        JsonBuilder.writeToJSON(map, response);
 		}
-//		request.getRequestDispatcher("show-info.jsp").forward(request, response);
 	}
 
 	public static void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
