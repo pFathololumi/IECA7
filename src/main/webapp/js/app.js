@@ -4,38 +4,65 @@
  * and open the template in the editor.
  */
 
-(function (){
-    var app = angular.module('stockmarket',[]);
-    
-    app.controller('MarketController',['$scope','$http',function ($scope,$http,$interval){
+(function () {
+    var app = angular.module('stockmarket', []);
+
+    app.controller('MarketController', ['$scope', '$http', function ($scope, $http, $interval) {
+
+        //var dataSymbol;
+        $scope.symbolsQ = [];
+
+        $scope.init = function () {
+            $http({
+                method: 'GET',
+                url: 'getinstrument'
+
+            }).success(function (data, status, headers, config) {
+
+                //dataSymbol = data;
+                $scope.symbolsQ = data;
+                //alert('SUCCESS');
+                alert($scope.symbolsQ[0]["name"]);
+
+            }).error(function (data, status, headers, config) {
+                alert('Error:' + data);
+            });
+        }
+
+       // $scope.init();
+        
+
         var marketCtrl = this;
         $scope.session = null;
         $scope.notification = null;
         this.symbolsQ = [];
-        this.closeNotificationBar = function (){
-            $scope.notification=null;
+        this.closeNotificationBar = function () {
+            $scope.notification = null;
         }
-        this.doLogin = function(){
+        
+        this.doLogin = function () {
             $http({
-                method : 'GET',
-                url :'getcustomer',
-                params : {'id': $scope.enteredID}
-            }).success(function(data,status, headers, config){
-                    console.log((typeof data));
-                    if(typeof data !=='string')
-                        $scope.session=data;
-                    else
-                        $scope.notification = data;
-                    
-            }).error(function (data,status, headers, config){
-                    alert('Error:' + data);
+                method: 'GET',
+                url: 'getcustomer',
+                params: { 'id': $scope.enteredID }
+            }).success(function (data, status, headers, config) {
+                console.log((typeof data));
+                if (typeof data !== 'string') {
+                    $scope.session = data;
+                    //$scope.getDataSymbol();
+                }
+                else
+                    $scope.notification = data;
+
+            }).error(function (data, status, headers, config) {
+                alert('Error:' + data);
             });
         }
 
 
         $scope.symbolName = null;
         $scope.symbolPrice = null;
-        this.select = function (value) { 
+        this.select = function (value) {
             $scope.symbolName = value;
             $scope.symbolPrice = marketCtrl.symbolList[value];
         }
@@ -48,52 +75,48 @@
         ];
 
         this.symbolList = {
-            'IRANKH':{ 'price': 20000 },
-            'SAIPA':{ 'price': 100000 },
-            'BMW':{ 'price': 900000 },
-            'BENZ':{ 'price': 800000 }
+            'IRANKH': { 'price': 20000 },
+            'SAIPA': { 'price': 100000 },
+            'BMW': { 'price': 900000 },
+            'BENZ': { 'price': 800000 }
         };
 
+       
+        
         this.getDataSymbol = function () {
-            alert("+");
             $http({
                 method: 'GET',
-                urt: 'getinstrument',
-            }).success(function () {
-                alert('Success:' + data + " " + (typeof data));
+                url: 'getinstrument'
+                
+            }).success(function (data, status, headers, config) {
+                
+                dataSymbol = data;
+                $scope.symbolsQ = dataSymbol;
+                alert('SUCCESS');
+                
             }).error(function (data, status, headers, config) {
                 alert('Error:' + data);
             });
         }
-        var dataSymbol = [{
-            "name":"Rana",
-            "quantity": 200,
-            "sellingOffers": [{ "id": 22, "quantity": 20, "price": 240, "type": "GTC" }, { "id": 22, "quantity": 20, "price": 240, "type": "GTC" }],
-            "buyingOffers": [{ "id": 22, "quantity": 20, "price": 240, "type": "GTC" }, { "id": 22, "quantity": 20, "price": 240, "type": "GTC" }]
-        },
-        {
-            "name": "Camaro",
-            "quantity": 1000,
-            "sellingOffers": [{ "id": 22, "quantity": 20, "price": 240, "type": "GTC" }, { "id": 22, "quantity": 20, "price": 240, "type": "GTC" }],
-            "buyingOffers": [{ "id": 22, "quantity": 20, "price": 240, "type": "GTC" }, { "id": 22, "quantity": 20, "price": 240, "type": "GTC" }]
-        }];
-        this.symbolsQ = dataSymbol;
-        this.updateSymbols = function(){
+        
+        //this.symbolsQ = dataSymbol;
+        
+        this.updateSymbols = function () {
             alert('not implemented');
         }
-//        $interval(function(){
-//            alert('time');
-        //        },1000*15);
+                //$interval(function(){
+                //    $scope.init();
+                //},1000*15);
 
-        
+
         $scope.userRequests = [];
 
         this.createRequest = function (price, quantity, type, buyOrSell) {
-            
+
             $scope.userRequests.push({ 'id': $scope.enteredID, 'instrument': $scope.symbolName, 'price': price, 'quantity': quantity, 'type': type, 'buyOrSell': buyOrSell });
             var len = $scope.userRequests.length - 1;
-            
-            alert("SUCCESS: "+$scope.userRequests[len].id + " " + $scope.userRequests[len].instrument + " " + $scope.userRequests[len].price +
+
+            alert("SUCCESS: " + $scope.userRequests[len].id + " " + $scope.userRequests[len].instrument + " " + $scope.userRequests[len].price +
                 " " + $scope.userRequests[len].quantity + " " + $scope.userRequests[len].type + " " + $scope.userRequests[len].buyOrSell);
         }
     }]);

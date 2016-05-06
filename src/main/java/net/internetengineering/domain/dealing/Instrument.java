@@ -24,8 +24,8 @@ public class Instrument {
     private List<SellingOffer> sellingOffers;
     private List<BuyingOffer> buyingOffers;
 
-	public Instrument(String symbol,Long quantity) {
-        this.symbol = symbol;
+	public Instrument(String sym,Long quantity) {
+        this.symbol = sym;
         this.quantity = quantity;
         this.sellingOffers = new ArrayList<SellingOffer>();
         this.buyingOffers = new ArrayList<BuyingOffer>();
@@ -104,7 +104,7 @@ public class Instrument {
 
 
 	public static void matchingOffers(PrintWriter out,Boolean basedOnBuyerPrice,
-			List<SellingOffer> sellingOffers,List<BuyingOffer>buyingOffers,String symbol,String type){
+			List<SellingOffer> sellingOffers,List<BuyingOffer>buyingOffers,String sym,String type){
 
     	SellingOffer sellingOffer = sellingOffers.get(0);
     	BuyingOffer buyingOffer = buyingOffers.get(0);
@@ -136,13 +136,13 @@ public class Instrument {
 						buyingOffers.remove(0);
 					}
 	    		}
-	    		StockMarket.changeCustomerProperty(sellingOffer, buyingOffer, buyPrice, buyQuantity, symbol);
+	    		StockMarket.changeCustomerProperty(sellingOffer, buyingOffer, buyPrice, buyQuantity, sym);
 				Customer seller = StockMarket.getInstance().getCustomer(sellingOffer.getID());
 				Customer buyer = StockMarket.getInstance().getCustomer(buyingOffer.getID());
-				Transaction t = new Transaction(buyer.getId(),seller.getId(),symbol,type,String.valueOf(buyQuantity),String.valueOf(buyer.getMoney()),
+				Transaction t = new Transaction(buyer.getId(),seller.getId(),sym,type,String.valueOf(buyQuantity),String.valueOf(buyer.getMoney()),
 						String.valueOf(seller.getMoney()));
 				CSVFileWriter.writeCsvFile(t);
-	    		out.println(sellingOffer.getID()+" sold "+buyQuantity+" shares of "+symbol+" @"+buyPrice+" to "+buyingOffer.getID());
+	    		out.println(sellingOffer.getID()+" sold "+buyQuantity+" shares of "+sym+" @"+buyPrice+" to "+buyingOffer.getID());
 	    	}else
 				break;
 	    	if(!sellingOffers.isEmpty()&&!buyingOffers.isEmpty()) {
@@ -164,8 +164,8 @@ public class Instrument {
     }
 
 
-    public Boolean symbolIsMatched(String symbol){
-        return symbol.equals(symbol);
+    public Boolean symbolIsMatched(String sym){
+        return this.symbol.equals(sym);
     }
     
     public Boolean HasQuantity(Long count){

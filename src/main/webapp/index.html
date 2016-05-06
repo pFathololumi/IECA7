@@ -1,5 +1,4 @@
-﻿﻿
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -53,9 +52,9 @@
         </div>
         <!-- /.container -->
     </nav>
-    
+
     <div class="navbar-inverse navbar" ng-show="notification" style="background-color: #555">
-        
+
         <div class="navbar-header navbar-right">
             <a href="" ng-click="ctrl.closeNotificationBar()"> <div class="navbar-brand">close</div> </<a>
         </div>
@@ -112,7 +111,7 @@
                     <div class="panel-heading">
                         <h4><i class="fa fa-fw fa-check"></i>لیست درخواست ها</h4>
                     </div>
-                    <div class="panel-body" >
+                    <div class="panel-body">
                         <!--<div ng-repeat="req in userRequests | orderBy:'name'" class="mystyle">-->
                         <ul ng-repeat="req in userRequests" class="mystyle" ng-show="session">
                             <li class="list-group-item">
@@ -131,8 +130,8 @@
                         <h4><i class="fa fa-fw fa-gift"></i>لیست سهام های شما</h4>
                     </div>
                     <div class="panel-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
-                        <a href="#" class="btn btn-default">Learn More</a>
+                        <p></p>
+                        <!--<a href="#" class="btn btn-default">Learn More</a>-->
                     </div>
                 </div>
             </div>
@@ -144,34 +143,31 @@
                     <div class="panel-body">
                         <div ng-repeat="symbol in symbols | orderBy:'name'" class="mystyle">
                             <!--<label>
-            {{symbol.name}}
-            <input type="radio" name="name" value="{{symbol.name}}" required />
-            <br />
-
-        </label>-->
+                                {{symbol.name}}
+                                <input type="radio" name="name" value="{{symbol.name}}" required />
+                                <br />
+                            </label>-->
                             <!--<button type="button" class="mr btn btn-pill-left btn-success" data-toggle="modal" data-target="#symbol" data-backdrop="static">{{symbol.name}}</button>-->
                             <p><a class="" data-toggle="modal" data-target="#symbol" data-backdrop="static" ng-model="selectSymbol" ng-click="ctrl.select(symbol.name)" ng-hide="!session">{{symbol.name}}</a></p>
 
 
                         </div>
-                        
+
                         <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>-->
                         <!--<a href="#" class="btn btn-primary btn-lg">Learn More &raquo;</a>-->
-                        
                         <!--<p><a class="btn btn-default" data-toggle="modal" data-target="#symbol" data-backdrop="static">خرید و فروش سهام</a></p>-->
                     </div>
                 </div>
             </div>
         </div>
         <!-- /.row -->
-
         <!-- Portfolio Section -->
-        <div class="row mystyle" >
+        <div class="row mystyle" ng-init="ctrl.init()">
 
             <div class="col-lg-12">
                 <h2 class="page-header ">
                     <span class="inline-style">وضعیت بازار</span>
-                    <button class="btn btn-secondary btn-default" ng-click="ctrl.updateSymbols()">به روز رسانی</button>
+                    <button class="btn btn-secondary btn-default" ng-click="ctrl.getDataSymbol()">به روز رسانی</button>
                 </h2>
             </div>
 
