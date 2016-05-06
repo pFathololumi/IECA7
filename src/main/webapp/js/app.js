@@ -21,15 +21,15 @@
 
                 //dataSymbol = data;
                 $scope.symbolsQ = data;
-                //alert('SUCCESS');
-                alert($scope.symbolsQ[0]["name"]);
+                alert('SUCCESS' + data);
+                
 
             }).error(function (data, status, headers, config) {
                 alert('Error:' + data);
             });
         }
 
-       // $scope.init();
+        $scope.init();
         
 
         var marketCtrl = this;
