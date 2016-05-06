@@ -7,9 +7,8 @@
 (function () {
     var app = angular.module('stockmarket', []);
 
-    app.controller('MarketController', ['$scope', '$http', function ($scope, $http, $interval) {
+    app.controller('MarketController', ['$scope', '$http', '$interval', function ($scope, $http, $interval) {
 
-        //var dataSymbol;
         $scope.symbolsQ = [];
 
         $scope.init = function () {
@@ -18,11 +17,12 @@
                 url: 'getinstrument'
 
             }).success(function (data, status, headers, config) {
-
-                //dataSymbol = data;
-                $scope.symbolsQ = data;
-                alert('SUCCESS' + data);
-                
+                if (typeof data !== 'string') {
+                    $scope.symbolsQ = data;
+                    //alert('SUCCESS' + data);
+                }
+                else
+                    $scope.notification = data;
 
             }).error(function (data, status, headers, config) {
                 alert('Error:' + data);
@@ -30,8 +30,7 @@
         }
 
         $scope.init();
-        
-
+       
         var marketCtrl = this;
         $scope.session = null;
         $scope.notification = null;
@@ -49,7 +48,7 @@
                 console.log((typeof data));
                 if (typeof data !== 'string') {
                     $scope.session = data;
-                    //$scope.getDataSymbol();
+                    
                 }
                 else
                     $scope.notification = data;
@@ -81,32 +80,34 @@
             'BENZ': { 'price': 800000 }
         };
 
-       
-        
+
         this.getDataSymbol = function () {
             $http({
                 method: 'GET',
                 url: 'getinstrument'
                 
             }).success(function (data, status, headers, config) {
+                if (typeof data !== 'string') {
+                    dataSymbol = data;
+                    $scope.symbolsQ = dataSymbol;
+                    alert('SUCCESS');
+                }
+                else
+                    $scope.notification = data;
                 
-                dataSymbol = data;
-                $scope.symbolsQ = dataSymbol;
-                alert('SUCCESS');
                 
             }).error(function (data, status, headers, config) {
                 alert('Error:' + data);
             });
         }
-        
-        //this.symbolsQ = dataSymbol;
-        
+   
+
         this.updateSymbols = function () {
             alert('not implemented');
         }
-                //$interval(function(){
-                //    $scope.init();
-                //},1000*15);
+                $interval(function(){
+                    $scope.init();
+                },1000*15);
 
 
         $scope.userRequests = [];
@@ -118,7 +119,24 @@
 
             alert("SUCCESS: " + $scope.userRequests[len].id + " " + $scope.userRequests[len].instrument + " " + $scope.userRequests[len].price +
                 " " + $scope.userRequests[len].quantity + " " + $scope.userRequests[len].type + " " + $scope.userRequests[len].buyOrSell);
+
+            $http({
+                method: 'GET',
+                url: 'transaction',
+                params: { 'id': $scope.enteredID, 'instrument': $scope.symbolName, 'price': price, 'quantity': quantity, 'type': type, 'order': buyOrSell }
+            }).success(function (data, status, headers, config) {
+                console.log((typeof data));
+                if (typeof data !== 'string') {
+                   
+                }
+                else
+                    $scope.notification = data;
+
+            }).error(function (data, status, headers, config) {
+                alert('Error:' + data);
+            });
         }
+
     }]);
 
 })();
