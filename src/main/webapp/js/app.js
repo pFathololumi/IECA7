@@ -17,7 +17,8 @@
                 url :'getcustomer',
                 params : {'id': $scope.enteredID}
             }).success(function(data,status, headers, config){
-                    alert('Success:' + data +" "+ (typeof data));
+                alert('Success:' + data + " " + (typeof data));
+
                     console.log((typeof data));
                     if(typeof data !=='string')
                     $scope.session=data;
@@ -27,7 +28,6 @@
         }
 
 
-        //$scope.buy & sellForm.$setPristine();
         $scope.symbolName = null;
         $scope.symbolPrice = null;
         this.select = function (value) { 
@@ -49,6 +49,17 @@
             'BENZ':{ 'price': 800000 }
         };
 
+        this.getDataSymbol = function () {
+            alert("+");
+            $http({
+                method: 'GET',
+                urt: 'getinstrument',
+            }).success(function () {
+                alert('Success:' + data + " " + (typeof data));
+            }).error(function (data, status, headers, config) {
+                alert('Error:' + data);
+            });
+        }
         var dataSymbol = [{
             "name":"Rana",
             "quantity": 200,
