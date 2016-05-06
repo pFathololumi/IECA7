@@ -87,7 +87,7 @@ public class Instrument {
 
 	public void executeBuyingByType(PrintWriter out, BuyingOffer offer) throws DataIllegalException {
 		try {
-			Class clazz = Class.forName("net.internetengineering.domain.domain.dealing.types."+offer.getType());
+			Class clazz = Class.forName("net.internetengineering.domain.dealing.types."+offer.getType());
 			Object obj= clazz.newInstance();
 			if(obj instanceof ITypeExecutor){
 				((ITypeExecutor)obj).buyingExecute(out,offer,sellingOffers,buyingOffers,symbol);
