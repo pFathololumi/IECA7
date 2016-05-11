@@ -13,6 +13,8 @@ public class MyLogger {
     }
 
     public void info(String s){
+        if(messages==null)
+            messages = new ArrayList<String>();
         messages.add(s);
     }
     public ArrayList<String> getAndFlushMyLogger(){
